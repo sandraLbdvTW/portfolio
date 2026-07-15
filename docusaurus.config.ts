@@ -85,7 +85,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'documentationSidebar',
           position: 'left',
-          label: 'Documentation',
+          label: 'Writing samples',
         },
         {
           type: 'docSidebar',
