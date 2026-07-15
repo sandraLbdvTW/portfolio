@@ -313,4 +313,3 @@ If your edit is missing from the output, commit it to the version branch and reb
 ## Next steps
 
 - [How a multi-repository Antora documentation platform fits together](01-antora-multi-repo-platform.md): see how content repositories, a UI bundle, and a central playbook form one site.
-- *A branching and merge-request workflow for a documentation team* (SOON!): decide where each change starts and how it reaches a published version.

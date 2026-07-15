@@ -39,9 +39,3 @@ Read the one that matches your question.
 - **[Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md)**—a how-to for a docs engineer with an Antora build in GitLab CI.
   On the real platform, reviewers read these previews along with raw diffs, served from the platform's own web host.
   The how-to shows the same workflow with previews served from CI artifacts, so you can reproduce it on any GitLab tier without hosting of your own.
-
-- **GitLab CI pipeline for an Antora documentation repository: a reference** (SOON!)—a reference for a maintainer extending or debugging the pipeline.
-  Every content repository runs this same pipeline; the reference documents it job by job, the way I'd want it documented for the maintainer after me.
-
-- **A branching and merge-request workflow for a documentation team** (SOON!)—an explanation of a policy for a documentation lead designing a Git workflow.
-  It's the team's day-to-day working agreement, documented here with the rationale behind each rule.

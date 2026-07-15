@@ -91,13 +91,7 @@ GitLab adds a **View app** button to the merge request overview.
 Each push runs a new job and gives the preview a new address.
 The button always opens the latest build.
 
-<!-- TODO: author captures this screenshot from a clean test project on gitlab.com, NOT from the internal GitLab (anonymization applies to images) -->
-
-[//]: # (![The merge request overview with the View app button]&#40;/img/gitlab-view-app-button.png&#41;)
-
 When the pipeline finishes, select **View app** to open the preview in your browser.
-
-<!-- Verified 2026-07-14 on gitlab.com (labuut1/sasha): the View app link opens the RENDERED preview on the namespace Pages domain; $CI_JOB_ID expands inside PREVIEW_URL and environment.url; works even though the Pages site itself sits on a unique domain, and with a private project behind Pages access control. TODO still open: the URL shape for a project in a subgroup, and whether the article needs a sentence about it. -->
 
 ## Let GitLab clean up previews
 
@@ -168,5 +162,3 @@ The start-page redirect and the page-to-page links are relative, so they work ei
 ## Next steps
 
 - [How a multi-repository Antora documentation platform fits together](01-antora-multi-repo-platform.md): see where this repository's pipeline sits in the wider build.
-- *GitLab CI pipeline for an Antora documentation repository: a reference* (SOON!): look up every job, variable, and rule in the pipeline, including the review-app fields.
-- *A branching and merge-request workflow for a documentation team* (SOON!): see the review process these previews support.

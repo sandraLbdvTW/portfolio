@@ -13,7 +13,7 @@ After reading it, you can name the moving parts of such a platform and decide wh
 
 ## One product, many components, one site
 
-This article uses a fictional product, Red Apple Conference.
+This article uses a fictional product, Red Apple Conference, modeled on a real platform.
 It ships a server, a web client, mobile clients, and several more components, each with its own release cycle and version numbers.
 Readers expect a single site with one address, one search box, and documentation that matches the component version they run.
 
@@ -162,11 +162,10 @@ A two-file diff shows every difference between staging and production, but share
 
 ## Where automation fits
 
-Two pieces of automation keep the platform running; each one has its own article in this series.
+Two pieces of automation keep the platform running.
 
 Content repositories trigger the central build.
 A pipeline in each content repository validates the component and then triggers the playbook repository: a push to `main` rebuilds the staging site, and a push to a `v*.*` branch rebuilds staging and production.
-The reference *GitLab CI pipeline for an Antora documentation repository* (SOON!) will document this pipeline job by job.
 
 Merge requests get previews.
 Every merge request in a content repository deploys its own temporary preview environment, linked from the merge request, and the preview expires automatically.
@@ -186,4 +185,3 @@ It's also questionable if all components release in lockstep: one repository wit
 
 - [Version your documentation with Antora branches](02-antora-versioning-tutorial.md): build a two-version site with a version selector, hands-on.
 - [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md): add preview links to your merge requests.
-- *GitLab CI pipeline for an Antora documentation repository: a reference* (SOON!): look up any job, variable, or rule in the content-repo pipeline.
