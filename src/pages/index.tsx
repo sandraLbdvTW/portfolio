@@ -19,8 +19,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/category/на-английском">
-            Какую?
+            to="/docs/">
+            What kind?
           </Link>
         </div>
       </div>
@@ -32,8 +32,8 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Портфолио`}
-      description="Портфолио Лебедева Александра">
+      title="Technical writing portfolio"
+      description="Technical writing portfolio of Aleksandra Lebedeva">
       <HomepageHeader />
       <main>
         <HomepageFeatures/>

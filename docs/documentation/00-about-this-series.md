@@ -1,4 +1,5 @@
 ---
+slug: /
 sidebar_position: 1
 description: The real project behind these articles, what their author owned, and how to read the series.
 ---

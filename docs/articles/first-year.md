@@ -1,4 +1,5 @@
 ---
+slug: /
 description: How to work faster and better
 ---
 

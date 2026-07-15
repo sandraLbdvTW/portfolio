@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Лебедева Александра',
-  tagline: 'Пишет документацию',
+  title: 'Aleksandra Lebedeva',
+  tagline: 'Writes documentation',
   favicon: 'img/favicon.png',
   noIndex: true,
 
@@ -43,24 +43,32 @@ const config: Config = {
           trackingID: 'G-H61M02S1QH',
         },
         docs: {
+          path: './docs/documentation',
+          routeBasePath: 'docs',
           sidebarPath: './sidebars.ts',
           sidebarCollapsed: false,
           // Remove this to remove the "edit this page" links.
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        // articles: {
-        //   sidebarPath: './sidebarsArticles.ts',
-        // },
-        // blog: {
-        //   showReadingTime: true,
-        //   editUrl:
-        //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        // },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
+    ],
+  ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'articles',
+        path: './docs/articles',
+        routeBasePath: 'articles',
+        sidebarPath: './sidebarsArticles.ts',
+        sidebarCollapsed: false,
+      },
     ],
   ],
 
@@ -69,24 +77,23 @@ const config: Config = {
     navbar: {
       title: '',
       logo: {
-        alt: 'Портфолио',
+        alt: 'Home',
         src: 'img/home.svg',
       },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'portfolioSidebar',
+          sidebarId: 'documentationSidebar',
           position: 'left',
-          label: 'Документация',
+          label: 'Documentation',
         },
         {
-          to: '/articles',
           type: 'docSidebar',
+          docsPluginId: 'articles',
           sidebarId: 'articlesSidebar',
           position: 'left',
-          label: 'Статьи',
+          label: 'Articles',
         },
-        // {to: '/blog', label: 'Blog', position: 'left'},
         // {
         //   href: 'https://github.com/facebook/docusaurus',
         //   label: 'GitHub',
@@ -98,8 +105,8 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          label: 'sandramoroz@yandex.ru',
-          href: 'mailto:sandramoroz@yandex.ru',
+          label: 'sandramoroz@yandex.com',
+          href: 'mailto:sandramoroz@yandex.com',
         },
         {
           label: 'tg: @lebedeva_av',
@@ -147,7 +154,6 @@ const config: Config = {
       //     ],
       //   },
       // ],
-      copyright: `Built with Docusaurus`,
     },
     prism: {
       theme: prismThemes.github,

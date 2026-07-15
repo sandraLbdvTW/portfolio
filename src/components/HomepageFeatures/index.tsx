@@ -5,24 +5,23 @@ import styles from './styles.module.css';
 type FeatureItem = {
   title: string;
   imgName: string;
-  // description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Пишет на русском',
+    title: 'Writes in English',
     imgName: 'cat-work.png',
   },
   {
-    title: 'Пишет на английском',
-    imgName: 'cat-learn.png',
+    title: 'Owns a docs platform',
+    imgName: 'cat-pipe.png',
   },
   {
-    title: 'Обновляет портфолио',
+    title: 'Has a portfolio',
     imgName: 'cat-portfolio.png',
   },
   {
-    title: 'Ищет работу',
+    title: 'Looks for a new team',
     imgName: 'cat-job.png',
   },
 ];
@@ -31,7 +30,11 @@ function Feature({title, imgName}: FeatureItem) {
   return (
     <div className={clsx('col')}>
       <div className="text--center">
-        <img src={require('@site/static/img/' + imgName).default} className={styles.featureSvg} role="img" />
+        <img
+          src={require('@site/static/img/' + imgName).default}
+          className={styles.featureSvg}
+          alt=""
+        />
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>

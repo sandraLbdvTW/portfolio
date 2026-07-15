@@ -17,7 +17,7 @@ export default function FooterLayout({style, links, logo, copyright}) {
         )}
       </div>
       <div className={styles.copyright}>
-        Иллюстрации:&nbsp;<a href="https://icons8.com/">Icons8</a>
+        Illustrations:&nbsp;<a href="https://icons8.com/">Icons8</a>
       </div>
     </footer>
   );
