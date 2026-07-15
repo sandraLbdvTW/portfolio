@@ -1,5 +1,6 @@
 ---
 description: Look up what every job, variable, and rule in the GitLab CI pipeline of an Antora content repository does.
+draft: true
 ---
 
 # GitLab CI pipeline for an Antora documentation repository: a reference
@@ -9,7 +10,7 @@ The pipeline checks that the component builds, lints the prose, gives each merge
 This reference describes each job, so you can look up what any field, variable, or rule does without reading the YAML end to end.
 
 This reference is for maintainers who extend or debug the pipeline of a content repository.
-For the platform around the pipeline, see [How a multi-repository Antora documentation platform fits together](antora-multi-repo-platform.md).
+For the platform around the pipeline, see [How a multi-repository Antora documentation platform fits together](01-antora-multi-repo-platform.md).
 
 The examples use a documentation repository for a fictional product, Red Apple Conference, modeled on a real platform.
 
@@ -44,7 +45,7 @@ Each job's `rules` block decides which pipelines the job lands in; the [rules ch
 ## `build-check`
 
 `build-check` answers one question on every push: does the component still build?
-It builds the component alone, from the repository's own `antora-playbook.yml`—the same standalone build you create in [Version your documentation with Antora branches](antora-versioning-tutorial.md).
+It builds the component alone, from the repository's own `antora-playbook.yml`—the same standalone build you create in [Version your documentation with Antora branches](02-antora-versioning-tutorial.md).
 
 ```yaml
 build-check:
@@ -162,7 +163,8 @@ Where findings appear—the merge request widget, the pipeline's **Code Quality*
 ## Review app jobs: `deploy-review` and `stop-review`
 
 In merge request pipelines, `deploy-review` builds the component with a per-merge-request site URL and publishes it as a live preview; `stop-review` removes the preview.
-The how-to [Set up per-merge-request preview environments with GitLab Review Apps](gitlab-review-apps-previews.md) builds both jobs step by step, so this section only documents their fields.
+The how-to [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md) sets up the same review workflow with previews served from CI artifacts, which need no stop job; this pipeline publishes previews to the platform's own web host, so it adds one.
+This section documents the fields of both jobs.
 
 | Field | Job | What it does |
 |---|---|---|
@@ -257,6 +259,6 @@ This is why `build-check` skips merge request pipelines—`deploy-review` alread
 
 ## Next steps
 
-- [Set up per-merge-request preview environments with GitLab Review Apps](gitlab-review-apps-previews.md): build the two review app jobs step by step.
-- [How a multi-repository Antora documentation platform fits together](antora-multi-repo-platform.md): see what the triggered central build assembles.
-- [A branching and merge-request workflow for a documentation team](docs-team-branching-workflow.md): the branch roles behind the `main` and `v*.*` rules.
+- [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md): build the two review app jobs step by step.
+- [How a multi-repository Antora documentation platform fits together](01-antora-multi-repo-platform.md): see what the triggered central build assembles.
+- [A branching and merge-request workflow for a documentation team](04-docs-team-branching-workflow.md): the branch roles behind the `main` and `v*.*` rules.

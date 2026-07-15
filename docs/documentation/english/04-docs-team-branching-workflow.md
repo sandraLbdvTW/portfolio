@@ -1,5 +1,6 @@
 ---
 description: Branch roles, a fix-branch rule, and merge-request conventions that route every documentation change to the right published version.
+draft: true
 ---
 
 # A branching and merge-request workflow for a documentation team
@@ -143,11 +144,11 @@ Each branch role doubles as a publishing rule in the platform's CI:
 - **Creating a release branch publishes the version.** The site build discovers `v*` branches automatically and adds the new one to the version selector, so releasing documentation is a Git operation, not a configuration change.
 - **Opening a merge request deploys a preview**, which is the rendered site the reviewer reads.
 
-The reference [GitLab CI pipeline for an Antora documentation repository](gitlab-ci-pipeline-reference.md) documents the jobs and rules that implement this routing.
-The article [How a multi-repository Antora documentation platform fits together](antora-multi-repo-platform.md) describes the platform they feed.
+The reference [GitLab CI pipeline for an Antora documentation repository](05-gitlab-ci-pipeline-reference.md) documents the jobs and rules that implement this routing.
+The article [How a multi-repository Antora documentation platform fits together](01-antora-multi-repo-platform.md) describes the platform they feed.
 
 ## Next steps
 
-- [Version your documentation with Antora branches](antora-versioning-tutorial.md): build the branch-per-version mechanics this workflow relies on.
-- [Set up per-merge-request preview environments with GitLab Review Apps](gitlab-review-apps-previews.md): give reviewers the live preview behind the review step.
-- [GitLab CI pipeline for an Antora documentation repository: a reference](gitlab-ci-pipeline-reference.md): look up the rules that read these branch names.
+- [Version your documentation with Antora branches](02-antora-versioning-tutorial.md): build the branch-per-version mechanics this workflow relies on.
+- [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md): give reviewers the live preview behind the review step.
+- [GitLab CI pipeline for an Antora documentation repository: a reference](05-gitlab-ci-pipeline-reference.md): look up the rules that read these branch names.

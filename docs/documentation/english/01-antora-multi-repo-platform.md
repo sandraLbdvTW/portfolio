@@ -20,10 +20,11 @@ Readers expect a single site with one address, one search box, and documentation
 A single documentation repository struggles here.
 Component releases happen on different dates, so no single branch can represent a release of the whole site.
 Per-component versioning becomes a naming convention instead of something the tooling enforces.
-Independent per-component sites fix ownership but break the reader's experience: search stops at component boundaries, and design drifts apart.
+Independent per-component sites fix versioning but break the reader's experience: search stops at component boundaries, and design drifts apart.
 
 Antora resolves this tension by design.
-Content lives in as many repositories as you need—the platform this series is based on assembles about 15—while one central build produces a single coherent site.
+Content lives in as many repositories as you need while one central build produces a single coherent site.
+The platform this series is based on assembles about 15 repositories; the examples in this article trim that to three.
 
 ## Key terms
 
@@ -64,6 +65,7 @@ graph LR
 ### Content repositories
 
 Each product component keeps its documentation in its own repository, for example `docs-server`, `docs-client-web`, and `docs-client-ios`.
+
 A repository contains AsciiDoc pages, images, and an `antora.yml` descriptor that names the component and its version.
 Branches carry the versions: each `v*` branch listed in the playbook becomes one entry in the site's version selector.
 
@@ -75,6 +77,7 @@ The component's own pipeline builds this help with the same UI bundle and a few 
 ### The UI repository
 
 A single repository, `docs-ui`, owns the site's look.
+
 Antora's default UI already provides the page layout, navigation, and the component version selector.
 This repository is a customized copy of the default UI, adapted to the product.
 Its continuous integration (CI) pipeline builds the theme into one artifact, `ui-bundle.zip`.
@@ -84,9 +87,9 @@ Every site build applies this bundle to every page, which keeps 15 components vi
 
 The central repository, `docs-playbook`, is where a site build starts.
 It holds no documentation content—only the playbook files and build scripts.
-The playbook tells Antora what to assemble. 
+The playbook tells Antora what to assemble.
 
-The production playbook, trimmed to three sources:
+Here is the production playbook, trimmed to three sources:
 ```yaml
 site:
   title: Red Apple Conference Documentation
@@ -106,25 +109,22 @@ antora:
     - require: '@antora/lunr-extension'
       languages: [en]
       index_latest_only: true
-output:
-  dir: ./public
 ```
 
 The `content.sources` list is the central piece of configuration.
-To add a component to the site, you create one merge request with one new `url` entry.
+To add a component to the site, you add a line with one new `url` entry.
 The component team's repository stays untouched.
 
 ## How a build assembles the site
 
 A full site build always starts in the playbook repository and runs the same way in CI and locally.
 
-1. A script generates the final playbook.
-   It queries each content repository for its `v*` branches and writes the list into a generated playbook file, so nobody maintains version lists by hand.
-2. Antora reads the generated playbook and fetches every source.
+1. Antora reads the playbook and fetches every source.
    For each repository it collects the listed branches; each branch becomes one version of that component, named by the `antora.yml` descriptor on that branch.
-3. Antora applies the UI bundle and builds the search index.
-   Every page gets the same templates and styles, and the Lunr extension indexes the latest version of each component for client-side search.
-4. The result lands in one output directory, `public/`.
+2. Antora applies the UI bundle, and the Lunr extension builds the search index.
+   Every page gets the same templates and styles, and the index covers the latest version of each component.
+   Searches run in the reader's browser, so the site needs no search server.
+3. The result lands in one output directory, `build/site` by default.
    The site is a plain static HTML tree, so any static file host can serve it.
 
 The important property of this flow: a component's documentation version exists the moment its `v*` branch exists.
@@ -139,7 +139,8 @@ Antora resolves every page ID to a URL at build time.
 The platform builds two variants of the site from two playbooks: `antora-playbook.dev.yml` and `antora-playbook.prod.yml`.
 The dev build publishes the staging site, where the team reviews work in progress.
 The prod build publishes the production site, which readers see.
-The playbooks differ only where the two environments must differ:
+
+The playbooks differ only where the two environments must differ, for example:
 
 | Setting | Dev | Prod |
 |---|---|---|
@@ -161,30 +162,28 @@ A two-file diff shows every difference between staging and production, but share
 
 ## Where automation fits
 
-Three pieces of automation keep the platform running.
-Each one gets its own article in this series, so this section only places them on the map.
-
-A script selects which versions to build.
-The script lists each repository's `v*` branches with `git ls-remote`, keeps the latest major versions, and writes the generated playbook.
-The tutorial [Version your documentation with Antora branches](antora-versioning-tutorial.md) shows the branch-to-version mechanics this script builds on.
+Two pieces of automation keep the platform running; each one has its own article in this series.
 
 Content repositories trigger the central build.
 A pipeline in each content repository validates the component and then triggers the playbook repository: a push to `main` rebuilds the staging site, and a push to a `v*.*` branch rebuilds staging and production.
-The reference [GitLab CI pipeline for an Antora documentation repository](gitlab-ci-pipeline-reference.md) documents this pipeline job by job.
+The reference *GitLab CI pipeline for an Antora documentation repository* (SOON!) will document this pipeline job by job.
 
 Merge requests get previews.
 Every merge request in a content repository deploys its own temporary preview environment, linked from the merge request, and the preview expires automatically.
-The how-to [Set up per-merge-request preview environments with GitLab Review Apps](gitlab-review-apps-previews.md) shows the setup.
+The how-to [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md) shows the setup.
 
 ## When this architecture is worth it
 
-The architecture earns its complexity when three things are true: your product has several components that version independently, readers need them on one site, and someone can own the central machinery—the playbook repository, the UI bundle, and the CI that ties them together.
+The architecture earns its complexity when three things are true: 
+1. Your product has several components that version independently.
+2. Readers need them on one site.
+3. Someone can own the central machinery—the playbook repository, the UI bundle, and the CI that ties them together.
 
 It's the wrong choice for a single-component product, where plain single-repository Antora or a simpler generator does the job with none of the coordination cost.
 It's also questionable if all components release in lockstep: one repository with one set of version branches is easier to operate.
 
 ## Next steps
 
-- [Version your documentation with Antora branches](antora-versioning-tutorial.md): build a two-version site with a version selector, hands-on.
-- [Set up per-merge-request preview environments with GitLab Review Apps](gitlab-review-apps-previews.md): add preview links to your merge requests.
-- [GitLab CI pipeline for an Antora documentation repository: a reference](gitlab-ci-pipeline-reference.md): look up any job, variable, or rule in the content-repo pipeline.
+- [Version your documentation with Antora branches](02-antora-versioning-tutorial.md): build a two-version site with a version selector, hands-on.
+- [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md): add preview links to your merge requests.
+- *GitLab CI pipeline for an Antora documentation repository: a reference* (SOON!): look up any job, variable, or rule in the content-repo pipeline.

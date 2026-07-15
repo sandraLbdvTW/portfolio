@@ -32,8 +32,6 @@ You don't need a hosting account or a remote repository.
 - A terminal.
   The commands in this tutorial run unchanged in Bash, Zsh, and PowerShell.
 
-You install Antora during the tutorial.
-
 ## Set up the project
 
 Create one folder that holds both the documentation repository and the Antora build.
@@ -89,7 +87,21 @@ Create one folder that holds both the documentation repository and the Antora bu
 A component is Antora's unit of documentation: a folder tree with an `antora.yml` descriptor and at least one module.
 The `antora.yml` file goes in the repository root.
 
-1. In the repository root, create `antora.yml`:
+1. Create a page at `modules/user-guide/pages/index.adoc`:
+
+   ```asciidoc
+   = Server User Guide
+
+   This page describes version 1.0 of the server.
+   ```
+
+2. Create the navigation file at `modules/user-guide/nav.adoc`:
+
+   ```asciidoc
+   * xref:index.adoc[User guide]
+   ```
+
+3. In the repository root, create `antora.yml`:
 
    ```yaml
    name: docs-server
@@ -99,24 +111,15 @@ The `antora.yml` file goes in the repository root.
      - modules/user-guide/nav.adoc
    ```
 
-   The `name` key identifies the component.
+   `name` identifies the component.
+   Antora uses it in URLs and page IDs.
 
-   The `version` key states which documentation version these files describe.
+   `title` sets the component name readers see in the site.
+
+   `version` states which documentation version these files describe.
    Quote the version so YAML reads it as text, not a number.
 
-2. Create a page at `modules/user-guide/pages/index.adoc`:
-
-   ```asciidoc
-   = Server User Guide
-
-   This page describes version 1.0 of the server.
-   ```
-
-3. Create the navigation file at `modules/user-guide/nav.adoc`:
-
-   ```asciidoc
-   * xref:index.adoc[User guide]
-   ```
+   `nav` lists the component's navigation files—here, the file you created in step 2.
 
 4. Commit the component:
 
@@ -170,10 +173,11 @@ Keep the playbook in the repository root, next to `antora.yml`.
 
    `url: .` points the build at the current repository.
 
-   `branches: [v*]` selects which of its branches become versions.
-   The `ui.bundle.url` points to Antora's default UI, downloaded during the build.
-   
-   The `start_page` is an Antora page ID: component, module, and page, separated by colons.
+   `branches: [v*]` selects which of its branches Antora builds.
+
+   `ui.bundle.url` points to Antora's default UI, downloaded during the build.
+
+   `start_page` is an Antora page ID: component, module, and page, separated by colons.
    The page ID omits the version segment, so Antora uses the latest version of the component.
 
 2. Commit the playbook:
@@ -213,8 +217,8 @@ Open file:///.../docs-server/build/site/index.html in a browser to view your sit
 
 Open `build/site/index.html` in your browser.
 The site opens on the user guide.
-The navigation panel shows the component and its version, **Server 1.0**.
-Only version 1.0 exists, so there's no version menu yet.
+The version selector at the bottom of the navigation panel shows the component and its version, **Server 1.0**.
+The version menu at the top of the page isn't visible yet: it appears only when a component has more than one version.
 
 ## Add a second version and rebuild
 
@@ -255,13 +259,9 @@ Version 2.0 starts on `main`, where the next version's work lives.
 
 6. Refresh `build/site/index.html` in your browser.
 
-The navigation panel now lists both versions.
+The version selector at the bottom of the navigation panel now lists both versions, and the version menu appears at the top of the page.
 Switch to 1.0: the page text changes back to the 1.0 wording.
 Antora built that page from the `v1.0` branch.
-
-[//]: # (![The version selector open, listing versions 2.0 and 1.0]&#40;/img/antora-version-selector.png&#41;)
-
-<!-- TODO: author captures this screenshot from the local build -->
 
 :::note
 Because you're working on `main`, Antora takes each `v*` branch from its latest commit, not from your working folder.
@@ -270,7 +270,7 @@ The `v*` branch you build must include that commit.
 If a change is missing, see [Troubleshoot a versioned build](#troubleshoot-a-versioned-build).
 :::
 
-You built a versioned Antora site: two branches, two versions, one version selector.
+You built a versioned Antora site: two branches, two versions, a version selector to switch between them.
 A production platform applies the same mechanism at scale: many component repositories, one central playbook, and automation that selects which `v*` branches to build.
 
 ## Troubleshoot a versioned build
@@ -312,5 +312,5 @@ If your edit is missing from the output, commit it to the version branch and reb
 
 ## Next steps
 
-- [How a multi-repository Antora documentation platform fits together](antora-multi-repo-platform.md): see how content repositories, a UI bundle, and a central playbook form one site.
-- [A branching and merge-request workflow for a documentation team](docs-team-branching-workflow.md): decide where each change starts and how it reaches a published version.
+- [How a multi-repository Antora documentation platform fits together](01-antora-multi-repo-platform.md): see how content repositories, a UI bundle, and a central playbook form one site.
+- *A branching and merge-request workflow for a documentation team* (SOON!): decide where each change starts and how it reaches a published version.
