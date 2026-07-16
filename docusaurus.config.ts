@@ -63,10 +63,10 @@ const config: Config = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'articles',
-        path: './docs/articles',
-        routeBasePath: 'articles',
-        sidebarPath: './sidebarsArticles.ts',
+        id: 'notes',
+        path: './docs/notes',
+        routeBasePath: 'notes',
+        sidebarPath: './sidebarsNotes.ts',
         sidebarCollapsed: false,
       },
     ],
@@ -78,7 +78,7 @@ const config: Config = {
       title: '',
       logo: {
         alt: 'Home',
-        src: 'img/home.svg',
+        src: 'img/homepage.png',
       },
       items: [
         {
@@ -89,10 +89,10 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          docsPluginId: 'articles',
-          sidebarId: 'articlesSidebar',
+          docsPluginId: 'notes',
+          sidebarId: 'notesSidebar',
           position: 'left',
-          label: 'Articles',
+          label: 'Notes',
         },
         // {
         //   href: 'https://github.com/facebook/docusaurus',
@@ -105,8 +105,8 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          label: 'sandramoroz@yandex.com',
-          href: 'mailto:sandramoroz@yandex.com',
+          label: 'lebedevasandra22@gmail.com',
+          href: 'mailto:lebedevasandra22@gmail.com',
         },
         {
           label: 'tg: @lebedeva_av',

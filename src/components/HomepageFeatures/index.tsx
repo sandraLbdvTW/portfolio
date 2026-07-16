@@ -21,7 +21,7 @@ const FeatureList: FeatureItem[] = [
     imgName: 'cat-portfolio.png',
   },
   {
-    title: 'Looks for a new team',
+    title: 'Is ready for a new team',
     imgName: 'cat-job.png',
   },
 ];
