@@ -9,7 +9,7 @@ This tutorial uses branches.
 Unlike a tag, a branch can still receive fixes after you publish the version.
 Each branch becomes a separate version of your documentation, with its own entry in the site's version selector.
 
-This tutorial is for technical writers who are new to Antora and want to learn versioning hands-on.
+This tutorial is for technical writers who are new to Antora and want hands-on practice with documentation versioning.
 It covers only the versioning workflow.
 For everything else Antora can do, see the [official Antora documentation](https://docs.antora.org).
 
@@ -21,7 +21,7 @@ You'll build a documentation site for one of its components, `docs-server`, with
 - version 1.0, on branch `v1.0`
 - version 2.0, on branch `v2.0`
 
-The built site shows a version selector that switches between the two.
+The built site shows a version selector that let you switch between the two.
 Everything runs on your computer.
 You don't need a hosting account or a remote repository.
 
@@ -142,14 +142,14 @@ docs-server/
             └── index.adoc
 ```
 
-Your `package.json` and `.gitignore` sit alongside `antora.yml` in the repository root.
+Your `package.json`, `package-lock.json` and `.gitignore` sit alongside `antora.yml` in the repository root.
 
 ## Add the playbook
 
 You have the content.
 To turn it into a site, Antora needs a playbook.
 
-Antora builds a site from two files:
+Two configuration files define the component version and the site build:
 
 - `antora.yml`, one per component, in the repository root. You already created it. It names the component and its version.
 - `antora-playbook.yml`, the playbook. It lists which branches to build, which UI to use, and the site's settings.
@@ -264,9 +264,8 @@ Switch to 1.0: the page text changes back to the 1.0 wording.
 Antora built that page from the `v1.0` branch.
 
 :::note
-Because you're working on `main`, Antora takes each `v*` branch from its latest commit, not from your working folder.
-A change reaches the site only after you commit it.
-The `v*` branch you build must include that commit.
+Because the `branches` filter excludes the checked-out `main` branch, Antora reads each selected `v*` branch from its latest commit rather than from the worktree.
+The relevant version branch must point to a commit that contains your change.
 If a change is missing, see [Troubleshoot a versioned build](#troubleshoot-a-versioned-build).
 :::
 

@@ -9,7 +9,8 @@ Each product component keeps its documentation in its own repository.
 A central build assembles the components into a single site with shared navigation, search, design, and a version selector for every component.
 
 This article is for technical writers and documentation leads who are evaluating Antora for a product with many components.
-After reading it, you can name the moving parts of such a platform and decide whether the architecture fits your product.
+After reading it, you can identify the parts of such a platform and decide whether the architecture fits your product.
+This article focuses on the platform architecture. For complete details on Antora and playbook configuration, see the [official Antora documentation](https://docs.antora.org).
 
 ## One product, many components, one site
 
@@ -17,14 +18,13 @@ This article uses a fictional product, Red Apple Conference, modeled on a real p
 It ships a server, a web client, mobile clients, and several more components, each with its own release cycle and version numbers.
 Readers expect a single site with one address, one search box, and documentation that matches the component version they run.
 
-A single documentation repository struggles here.
-Component releases happen on different dates, so no single branch can represent a release of the whole site.
-Per-component versioning becomes a naming convention instead of something the tooling enforces.
-Independent per-component sites fix versioning but break the reader's experience: search stops at component boundaries, and design drifts apart.
+A single documentation repository makes independent versioning difficult.
+Every Git branch contains the documentation for all components, even though the components are released separately.
+Giving each component its own documentation site solves this problem but fragments the reader experience: search stops at component boundaries, and the sites' designs drift apart.
 
 Antora resolves this tension by design.
 Content lives in as many repositories as you need while one central build produces a single coherent site.
-The platform this series is based on assembles about 15 repositories; the examples in this article trim that to three.
+The real-world platform behind this series assembles content from about 15 repositories. The examples in this article use three.
 
 ## Key terms
 
@@ -174,7 +174,7 @@ The how-to [Set up per-merge-request preview environments with GitLab Review App
 ## When this architecture is worth it
 
 The architecture earns its complexity when three things are true: 
-1. Your product has several components that version independently.
+1. Your product has several independently versioned components.
 2. Readers need them on one site.
 3. Someone can own the central machinery—the playbook repository, the UI bundle, and the CI that ties them together.
 
@@ -183,5 +183,5 @@ It's also questionable if all components release in lockstep: one repository wit
 
 ## Next steps
 
-- [Version your documentation with Antora branches](02-antora-versioning-tutorial.md): build a two-version site with a version selector, hands-on.
+- [Version your documentation with Antora branches](02-antora-versioning-tutorial.md): follow a hands-on tutorial to build a two-version site with a version selector.
 - [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md): add preview links to your merge requests.
