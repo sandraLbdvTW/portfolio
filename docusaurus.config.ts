@@ -105,8 +105,8 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          label: 'lebedevasandra22@gmail.com',
-          href: 'mailto:lebedevasandra22@gmail.com',
+          label: 'morozovasandra@gmail.com',
+          href: 'mailto:morozovasandra@gmail.com',
         },
         {
           label: 'tg: @lebedeva_av',
@@ -156,8 +156,17 @@ const config: Config = {
       // ],
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      // Keep the stock syntax colors, but warm the code block background so it
+      // sits on the page instead of reading as a cool panel. The rest of the
+      // palette lives in src/css/custom.css.
+      theme: {
+        ...prismThemes.github,
+        plain: {...prismThemes.github.plain, backgroundColor: '#f8f5f1'},
+      },
+      darkTheme: {
+        ...prismThemes.dracula,
+        plain: {...prismThemes.dracula.plain, backgroundColor: '#2c2825'},
+      },
     },
   } satisfies Preset.ThemeConfig,
 };

@@ -29,6 +29,13 @@
   margin: 0 5px 5px;
 
   font-size: 70%;
-  color: gray;
+  color: var(--ifm-footer-link-color);
   opacity: 60%;
+}
+
+/* Without this the link renders in the primary color, which is too dark to
+   read against the footer. */
+.copyright a {
+  color: inherit;
+  text-decoration: underline;
 }

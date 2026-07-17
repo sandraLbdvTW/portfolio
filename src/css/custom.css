@@ -2,29 +2,147 @@
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
+ *
+ * The palette is sampled from the illustrations in static/img:
+ * orange #eb7e44, green #b1d07a, beige #dccec4, taupe #bfaf9c,
+ * off-white #f6eaea. Light mode darkens the illustration orange to
+ * #af501d so link text clears WCAG AA on a light background; dark mode
+ * uses the illustration orange as-is.
  */
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Infima derives borders, dividers, hover states, and emphasis colors from
+     this ramp, so warming it warms the whole UI in both color modes. */
+  --ifm-color-gray-100: #f9f6f3;
+  --ifm-color-gray-200: #f0ebe6;
+  --ifm-color-gray-300: #e2dcd4;
+  --ifm-color-gray-400: #c7bdb2;
+  --ifm-color-gray-500: #a69a8c;
+  --ifm-color-gray-600: #837567;
+  --ifm-color-gray-700: #65584e;
+  --ifm-color-gray-800: #493f37;
+  --ifm-color-gray-900: #2f2823;
+
+  --ifm-color-primary: #af501d;
+  --ifm-color-primary-dark: #9e481a;
+  --ifm-color-primary-darker: #954418;
+  --ifm-color-primary-darkest: #7b3814;
+  --ifm-color-primary-light: #c1581f;
+  --ifm-color-primary-lighter: #ca5c21;
+  --ifm-color-primary-lightest: #dd6a2c;
+
+  /* Note admonitions and secondary buttons. Infima's default is a cool gray. */
+  --ifm-color-secondary: #f0ebe6;
+  --ifm-color-secondary-dark: #dfd7cd;
+  --ifm-color-secondary-darker: #d4cbbf;
+  --ifm-color-secondary-darkest: #b3a798;
+  --ifm-color-secondary-light: #f4f0ec;
+  --ifm-color-secondary-lighter: #f5f3ef;
+  --ifm-color-secondary-lightest: #f9f7f4;
+  --ifm-color-secondary-contrast-background: #fdfdfb;
+  --ifm-color-secondary-contrast-foreground: #50473f;
+
+  /* Tip admonitions, sampled from the green in the illustrations. */
+  --ifm-color-success: #5f802d;
+  --ifm-color-success-dark: #567329;
+  --ifm-color-success-darker: #516d26;
+  --ifm-color-success-darkest: #435a20;
+  --ifm-color-success-light: #698d32;
+  --ifm-color-success-lighter: #6d9434;
+  --ifm-color-success-lightest: #7ca73b;
+  --ifm-color-success-contrast-background: #f1f7e9;
+  --ifm-color-success-contrast-foreground: #2a3913;
+
+  --ifm-background-color: #fcf9f5;
+  --ifm-background-surface-color: #fefdfb;
+  --ifm-font-color-base: #342c27;
+  --ifm-heading-color: #261f1c;
+
+  --ifm-code-background: rgba(147, 87, 47, 0.08);
+  --ifm-hover-overlay: rgba(175, 80, 29, 0.06);
+  --ifm-table-stripe-background: rgba(66, 47, 36, 0.035);
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(66, 47, 36, 0.08);
+
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(175, 80, 29, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+/* For readability concerns, you should choose a lighter palette in dark mode.
+   This has to match Infima's own `html[data-theme='dark']` selector: a plain
+   [data-theme='dark'] is less specific and loses for every variable Infima
+   sets there, including the backgrounds and the *-contrast-* pairs. */
+html[data-theme='dark'] {
+  --ifm-color-primary: #eb7d42;
+  --ifm-color-primary-dark: #e86a27;
+  --ifm-color-primary-darker: #e76119;
+  --ifm-color-primary-darkest: #bf5014;
+  --ifm-color-primary-light: #ee905d;
+  --ifm-color-primary-lighter: #ef996b;
+  --ifm-color-primary-lightest: #f4b593;
+
+  --ifm-color-secondary-contrast-background: #2c2926;
+  --ifm-color-secondary-contrast-foreground: #e2dcd4;
+
+  --ifm-color-success: #b1d17b;
+  --ifm-color-success-dark: #a3c862;
+  --ifm-color-success-darker: #9bc456;
+  --ifm-color-success-darkest: #83ac3c;
+  --ifm-color-success-light: #c0d993;
+  --ifm-color-success-lighter: #c7dea0;
+  --ifm-color-success-lightest: #ddeac5;
+  --ifm-color-success-contrast-background: #202518;
+  --ifm-color-success-contrast-foreground: #e4eed3;
+
+  --ifm-background-color: #1f1b19;
+  --ifm-background-surface-color: #282422;
+  --ifm-color-content: #e8e3de;
+  --ifm-font-color-base: #e8e3de;
+  --ifm-heading-color: #f6f2ee;
+
+  --ifm-code-background: rgba(235, 126, 66, 0.12);
+  --ifm-hover-overlay: rgba(235, 126, 66, 0.1);
+  --ifm-table-stripe-background: rgba(255, 255, 255, 0.035);
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+
+  --ifm-scrollbar-track-background-color: #2c2825;
+  --ifm-scrollbar-thumb-background-color: #55493f;
+  --ifm-scrollbar-thumb-hover-background-color: #6b5d51;
+
+  --docusaurus-highlighted-code-line-bg: rgba(235, 126, 66, 0.16);
+}
+
+/* Infima hardcodes a cool slate for the dark footer, so it has to be set
+   explicitly rather than picked up from the gray ramp above. */
+.footer--dark {
+  --ifm-footer-background-color: #2f2823;
+  --ifm-footer-link-color: #ded5cd;
+  --ifm-footer-link-hover-color: #f4b593;
+}
+
+/* The homepage hero picks up the beige the illustrations sit on, rather than
+   filling the band with the primary color. */
+.hero--primary {
+  --ifm-hero-background-color: #ddcfc5;
+  --ifm-hero-text-color: #422f24;
+  background: linear-gradient(180deg, #f0e8e0 0%, #ddcfc5 100%);
+}
+
+[data-theme='dark'] .hero--primary {
+  --ifm-hero-background-color: #2e2824;
+  --ifm-hero-text-color: #f6f2ee;
+  background: linear-gradient(180deg, #2e2824 0%, #231d1a 100%);
+}
+
+/* Infima's secondary button is a pale gray that disappears on the beige hero. */
+.hero--primary .button--secondary {
+  --ifm-button-background-color: var(--ifm-color-primary);
+  --ifm-button-border-color: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.hero--primary .button--secondary:hover {
+  --ifm-button-background-color: var(--ifm-color-primary-dark);
+  --ifm-button-border-color: var(--ifm-color-primary-dark);
+  color: #fff;
 }
