@@ -12,7 +12,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: (
       <Translate id="homepage.feature.writesEnglish">
-        Writes in English
+        Makes sense of things
       </Translate>
     ),
     imgName: 'cat-work.png',
@@ -20,7 +20,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: (
       <Translate id="homepage.feature.ownsDocsPlatform">
-        Owns a docs platform
+        Automates the boring bits
       </Translate>
     ),
     imgName: 'cat-pipe.png',
@@ -28,7 +28,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: (
       <Translate id="homepage.feature.hasPortfolio">
-        Has a portfolio
+        Has the docs to prove it
       </Translate>
     ),
     imgName: 'cat-portfolio.png',
@@ -36,7 +36,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: (
       <Translate id="homepage.feature.readyForTeam">
-        Is ready for a new team
+        Is looking for good company
       </Translate>
     ),
     imgName: 'cat-job.png',
