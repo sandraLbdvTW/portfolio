@@ -259,6 +259,6 @@ This is why `build-check` skips merge request pipelines—`deploy-review` alread
 
 ## Next steps
 
-- [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md): build the two review app jobs step by step.
+- [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md): set up merge request previews step by step.
 - [How a multi-repository Antora documentation platform fits together](01-antora-multi-repo-platform.md): see what the triggered central build assembles.
 - [A branching and merge-request workflow for a documentation team](04-docs-team-branching-workflow.md): the branch roles behind the `main` and `v*.*` rules.
