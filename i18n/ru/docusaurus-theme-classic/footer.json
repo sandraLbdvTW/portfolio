@@ -1,0 +1,10 @@
+{
+  "link.item.label.morozovasandra@gmail.com": {
+    "message": "morozovasandra@gmail.com",
+    "description": "The label of footer link with label=morozovasandra@gmail.com linking to mailto:morozovasandra@gmail.com"
+  },
+  "link.item.label.Telegram: @lebedeva_av": {
+    "message": "Telegram: @lebedeva_av",
+    "description": "The label of footer link with label=Telegram: @lebedeva_av linking to https://t.me/lebedeva_av"
+  }
+}

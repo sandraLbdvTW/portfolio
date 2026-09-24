@@ -1,7 +1,7 @@
 ---
 slug: /
 sidebar_position: 1
-description: The real project behind these articles, what their author owned, and how to read the series.
+description: The real project behind these articles, what their author owns, and how to read the series.
 ---
 
 # About this series: documentation for a real Antora platform
@@ -11,21 +11,23 @@ The platform is real—I designed it, built its tooling, and maintain it at my e
 
 The articles aren't a case study, though. Each one is a genuine piece of technical documentation, written for its own reader and readable on its own. Together they show both the platform and how I write about it.
 
-## What I owned
+## What I own
 
-I gathered the team's requirements, selected Antora, and designed the writing, review, and publishing workflow, then moved the team from Microsoft Word to Git and trained the writers.
+My employer hired me to move its documentation from Microsoft Word to docs-as-code. I gathered the business and team requirements, made the case for a single documentation site, selected Antora, and designed the platform and the writing, review, and publishing workflow.
 
-On the platform itself I own the branching and versioning model and the GitLab CI of all repositories, including the per-merge-request preview environments.
+I guided the team through the transition: I prepared training and step-by-step guides, helped the writers learn Git, and supported their first merge requests. I wrote the editorial standards and a guide for authors. Today I maintain these rules, review content, and help colleagues work through complex tasks.
 
-I also reworked the site's UI bundle from Antora's default and built a few internal tools for the team.
+On the platform, I own the repository structure, the branching and versioning model, the central build, and CI/CD.
+
+I reworked Antora's default UI bundle and built tools that select versions at build time, optimize images, and produce PDFs. I set up automated checks for style, links, and the build. I keep developing the platform based on the team's feedback: I look into day-to-day difficulties and simplify repetitive tasks.
 
 Server provisioning and deployment are the work of DevOps colleagues, so the articles leave them out.
 
 ## How to read the articles
 
-The articles anonymize everything product-specific: they document a fictional product, Red Apple Conference, on example hosts such as `git.example.com`.
+The articles anonymize everything product-specific: they document a fictional product, Red Apple Conference, and use example hosts such as `git.example.com`.
 
-The examples are simplified: configuration samples show two or three content repositories where the real platform assembles about 15, and some project-specific detail is deliberately omitted, but the mechanisms are the ones in production.
+The examples are simplified: configuration samples show up to four content repositories, while the real platform assembles more than 15. Some project-specific details are deliberately omitted, but the mechanisms are the ones in production.
 
 Each article is a different document type with its own reader.
 Read the one that matches your question.
@@ -38,5 +40,5 @@ Read the one that matches your question.
   Branch-as-version is the model the team works in daily; the tutorial rebuilds it from scratch.
 
 - **[Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md)**—a how-to for a docs engineer with an Antora build in GitLab CI.
-  On the real platform, reviewers read these previews along with raw diffs, served from the platform's own web host.
+  On the real platform, its own web host serves the previews, and reviewers read them along with raw diffs.
   The how-to shows the same workflow with previews served from CI artifacts, so you can reproduce it on any GitLab tier without hosting of your own.

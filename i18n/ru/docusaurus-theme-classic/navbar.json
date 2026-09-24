@@ -1,0 +1,14 @@
+{
+  "logo.alt": {
+    "message": "Главная",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Writing samples": {
+    "message": "Примеры текстов",
+    "description": "Navbar item with label Writing samples"
+  },
+  "item.label.Notes": {
+    "message": "Заметки",
+    "description": "Navbar item with label Notes"
+  }
+}

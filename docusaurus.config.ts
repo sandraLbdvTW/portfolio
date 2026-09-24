@@ -27,7 +27,17 @@ const config: Config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'ru'],
+    localeConfigs: {
+      en: {
+        label: 'English',
+        htmlLang: 'en',
+      },
+      ru: {
+        label: 'Русский',
+        htmlLang: 'ru-RU',
+      },
+    },
   },
 
   markdown: {
@@ -94,6 +104,10 @@ const config: Config = {
           position: 'left',
           label: 'Notes',
         },
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
         // {
         //   href: 'https://github.com/facebook/docusaurus',
         //   label: 'GitHub',
@@ -109,7 +123,7 @@ const config: Config = {
           href: 'mailto:morozovasandra@gmail.com',
         },
         {
-          label: 'tg: @lebedeva_av',
+          label: 'Telegram: @lebedeva_av',
           href: 'https://t.me/lebedeva_av',
         },
       ],

@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import Translate from '@docusaurus/Translate';
 import styles from "@site/src/pages/index.module.css";
 export default function FooterLayout({style, links, logo, copyright}) {
   return (
@@ -17,7 +18,8 @@ export default function FooterLayout({style, links, logo, copyright}) {
         )}
       </div>
       <div className={styles.copyright}>
-        Illustrations:&nbsp;<a href="https://icons8.com/">Icons8</a>
+        <Translate id="footer.illustrations">Illustrations:</Translate>
+        &nbsp;<a href="https://icons8.com/">Icons8</a>
       </div>
     </footer>
   );

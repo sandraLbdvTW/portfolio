@@ -17,12 +17,14 @@ The `red-apple` group hosts the published site on GitLab Pages, and GitLab serve
 ## Prerequisites
 
 - An Antora documentation repository that already builds in GitLab CI.
-- Merge request pipelines enabled for the project, so jobs can run on `merge_request_event`.
+- If `.gitlab-ci.yml` has `workflow:rules`, they must allow merge request pipelines (`merge_request_event`).
 - GitLab Pages enabled on the instance—GitLab renders the previews on the Pages domain.
-  GitLab.com has Pages enabled. If you have self-managed GitLab, ask your administrators.
-- For a private or internal project, GitLab Pages access control enabled, so GitLab checks who may open a preview.
+  GitLab.com has Pages enabled.
+  If you have self-managed GitLab, ask your administrators.
+- For a private or internal project, GitLab Pages access control turned on for the instance, so GitLab checks who may open a preview.
+  On self-managed GitLab, an administrator turns it on.
 
-## Publish each merge request at its own URL
+## Publish a preview for each merge request
 
 A preview is an ordinary Antora build that the job stores as artifacts—the files GitLab keeps after a job finishes.
 GitLab itself serves those files, so the pipeline needs no publish step.
@@ -93,6 +95,13 @@ The button always opens the latest build.
 
 When the pipeline finishes, select **View app** to open the preview in your browser.
 
+:::note
+After you add `deploy-review`, a push to a merge request's branch can start two pipelines: a branch pipeline with your existing jobs and a merge request pipeline with `deploy-review`.
+The merge request takes its pipeline status from the merge request pipeline, so checks that run only in branch pipelines, such as a build or a linter, no longer affect it.
+To keep those checks in the merge request status, run them in merge request pipelines as well.
+For details, see [Configure merge request pipelines](https://docs.gitlab.com/ci/pipelines/merge_request_pipelines/#configure-merge-request-pipelines).
+:::
+
 ## Let GitLab clean up previews
 
 A preview is only useful while its merge request is open.
@@ -121,10 +130,12 @@ deploy-review:
 ```
 
 `artifacts:expire_in` deletes a stored build a week after its job finishes.
-One exception works in your favor—GitLab keeps the most recent successful build of each branch past that expiry, so an open merge request doesn't lose its current preview while superseded builds expire.
+The exception is the most recent successful build of each branch, which GitLab keeps past that expiry.
+An open merge request keeps its current preview, and superseded builds expire.
 
-The environment retires itself, too.
-GitLab stops it when the merge request is merged or closed—no stop job required—and `auto_stop_in: 7 days` stops it when no new push arrives for a week.
+The environment stops automatically, too.
+GitLab stops it when the merge request is merged or closed, so you don't need a stop job.
+`auto_stop_in: 7 days` stops it when no new push arrives for a week.
 
 To see which previews are live, open the project's **Environments** page and look under `review`.
 
@@ -136,14 +147,14 @@ When a preview doesn't work, the cause is usually in the job rules, the artifact
 
 The `deploy-review` job didn't run for the merge request.
 Open the merge request pipeline and check that the job is there.
-If it's missing, confirm that the job's `rules` match `merge_request_event` and that the project runs merge request pipelines.
+If it's missing, confirm that the job's `rules` match `merge_request_event` and that `workflow:rules`, if any, allow merge request pipelines.
 
 ### The browser shows HTML source or downloads the file
 
 The preview URL points at the GitLab host instead of the Pages domain, or the Pages domain isn't available.
 GitLab renders artifact HTML only on the Pages domain, so check the host in `PREVIEW_URL` first.
 If the host is right, confirm with your administrators that the instance has GitLab Pages enabled.
-For a private project, also enable GitLab Pages access control in the project settings.
+For a private or internal project, also confirm that your administrators turned on GitLab Pages access control for the instance.
 
 ### The preview URL returns 404
 
@@ -152,12 +163,13 @@ Compare the path after `artifacts` in `PREVIEW_URL` with the job's `artifacts:pa
 The URL must also end with a file, because a link that stops at a directory returns 404.
 If the address is right, check the job's age: stored builds expire after the `expire_in` period.
 
-### The preview links to the production site
+### The site title links to the production site
 
-The home link in the navigation bar—the link on the site title—leaves the preview.
-The playbook sets the production URL, so a build without the `--url` override writes production destinations into the site.
-Build with `--url "$PREVIEW_URL"`, and the home link resolves inside the preview again.
-The start-page redirect and the page-to-page links are relative, so they work either way.
+The site title in the navigation bar is a link to the home page.
+If it opens the production site from a preview, the job built the site without the `--url` flag.
+Antora builds this link from the site URL, and the playbook sets the production URL.
+Check that the job builds the site with `--url "$PREVIEW_URL"`.
+The start-page redirect and the other links are relative, so they work without the flag.
 
 ## Next steps
 

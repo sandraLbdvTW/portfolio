@@ -1,27 +1,44 @@
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
+import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
 
 type FeatureItem = {
-  title: string;
+  title: JSX.Element;
   imgName: string;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Writes in English',
+    title: (
+      <Translate id="homepage.feature.writesEnglish">
+        Writes in English
+      </Translate>
+    ),
     imgName: 'cat-work.png',
   },
   {
-    title: 'Owns a docs platform',
+    title: (
+      <Translate id="homepage.feature.ownsDocsPlatform">
+        Owns a docs platform
+      </Translate>
+    ),
     imgName: 'cat-pipe.png',
   },
   {
-    title: 'Has a portfolio',
+    title: (
+      <Translate id="homepage.feature.hasPortfolio">
+        Has a portfolio
+      </Translate>
+    ),
     imgName: 'cat-portfolio.png',
   },
   {
-    title: 'Is ready for a new team',
+    title: (
+      <Translate id="homepage.feature.readyForTeam">
+        Is ready for a new team
+      </Translate>
+    ),
     imgName: 'cat-job.png',
   },
 ];

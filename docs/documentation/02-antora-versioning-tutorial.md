@@ -21,7 +21,7 @@ You'll build a documentation site for one of its components, `docs-server`, with
 - version 1.0, on branch `v1.0`
 - version 2.0, on branch `v2.0`
 
-The built site shows a version selector that let you switch between the two.
+The built site shows a version selector that lets you switch between the two.
 Everything runs on your computer.
 You don't need a hosting account or a remote repository.
 
@@ -31,10 +31,11 @@ You don't need a hosting account or a remote repository.
 - Git.
 - A terminal.
   The commands in this tutorial run unchanged in Bash, Zsh, and PowerShell.
+  If Windows PowerShell shows an error containing `running scripts is disabled on this system`, run `npm.cmd` and `npx.cmd` instead of `npm` and `npx`.
 
 ## Set up the project
 
-Create one folder that holds both the documentation repository and the Antora build.
+The documentation repository and the Antora build share one directory.
 
 1. Create the repository:
 
@@ -51,7 +52,7 @@ Create one folder that holds both the documentation repository and the Antora bu
    node_modules/
    ```
 
-3. Install Antora into the folder:
+3. Install Antora into the directory:
 
    ```shell
    npm init -y
@@ -84,7 +85,7 @@ Create one folder that holds both the documentation repository and the Antora bu
 
 ## Create the documentation component
 
-A component is Antora's unit of documentation: a folder tree with an `antora.yml` descriptor and at least one module.
+A component is Antora's unit of documentation: a directory tree with an `antora.yml` descriptor and at least one module.
 The `antora.yml` file goes in the repository root.
 
 1. Create a page at `modules/user-guide/pages/index.adoc`:
@@ -128,7 +129,7 @@ The `antora.yml` file goes in the repository root.
    git commit -m "Add the user guide"
    ```
 
-   Antora reads a local repository from its commits, so this commit matters.
+   Antora reads version branches from their commits, not from your working files, so this commit matters.
 
 The component now looks like this:
 
@@ -142,7 +143,7 @@ docs-server/
             └── index.adoc
 ```
 
-Your `package.json`, `package-lock.json` and `.gitignore` sit alongside `antora.yml` in the repository root.
+Your `package.json`, `package-lock.json`, and `.gitignore` sit alongside `antora.yml` in the repository root.
 
 ## Add the playbook
 
@@ -151,8 +152,11 @@ To turn it into a site, Antora needs a playbook.
 
 Two configuration files define the component version and the site build:
 
-- `antora.yml`, one per component, in the repository root. You already created it. It names the component and its version.
-- `antora-playbook.yml`, the playbook. It lists which branches to build, which UI to use, and the site's settings.
+- `antora.yml`, one per component, in the repository root.
+  You already created it.
+  It names the component and its version.
+- `antora-playbook.yml`, the playbook.
+  It lists which branches to build, which UI to use, and the site's settings.
 
 Keep the playbook in the repository root, next to `antora.yml`.
 
@@ -169,6 +173,7 @@ Keep the playbook in the repository root, next to `antora.yml`.
    ui:
      bundle:
        url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+       snapshot: true
    ```
 
    `url: .` points the build at the current repository.
@@ -176,6 +181,7 @@ Keep the playbook in the repository root, next to `antora.yml`.
    `branches: [v*]` selects which of its branches Antora builds.
 
    `ui.bundle.url` points to Antora's default UI, downloaded during the build.
+   `snapshot: true` tells Antora that the bundle at this URL changes over time.
 
    `start_page` is an Antora page ID: component, module, and page, separated by colons.
    The page ID omits the version segment, so Antora uses the latest version of the component.
@@ -207,7 +213,7 @@ Build the site:
 npx antora antora-playbook.yml
 ```
 
-Antora writes the site to the `build/site` folder.
+Antora writes the site to the `build/site` directory.
 It prints a completion message:
 
 ```
@@ -264,7 +270,8 @@ Switch to 1.0: the page text changes back to the 1.0 wording.
 Antora built that page from the `v1.0` branch.
 
 :::note
-Because the `branches` filter excludes the checked-out `main` branch, Antora reads each selected `v*` branch from its latest commit rather than from the worktree.
+Antora reads each `v*` branch from its latest commit, not from your working files.
+Only the checked-out branch, `main`, comes from the working files, and the playbook doesn't build `main`.
 The relevant version branch must point to a commit that contains your change.
 If a change is missing, see [Troubleshoot a versioned build](#troubleshoot-a-versioned-build).
 :::
@@ -312,3 +319,4 @@ If your edit is missing from the output, commit it to the version branch and reb
 ## Next steps
 
 - [How a multi-repository Antora documentation platform fits together](01-antora-multi-repo-platform.md): see how content repositories, a UI bundle, and a central playbook form one site.
+- [Set up per-merge-request preview environments with GitLab Review Apps](03-gitlab-review-apps-previews.md): if your site builds in GitLab CI, add preview links to your merge requests.

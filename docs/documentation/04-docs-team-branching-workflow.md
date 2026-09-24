@@ -141,7 +141,7 @@ Each branch role doubles as a publishing rule in the platform's CI:
 
 - **Merging into `main` rebuilds the staging site**, where the team reviews unreleased documentation in the context of the whole site.
 - **Merging into a release branch rebuilds production**, so a fix reaches readers minutes after approval, independent of any product release.
-- **Creating a release branch publishes the version.** The site build discovers `v*` branches automatically and adds the new one to the version selector, so releasing documentation is a Git operation, not a configuration change.
+- **Creating a release branch publishes the version.** The site build discovers `v*` branches automatically and adds the new one to the version selector, so releasing documentation doesn't require a configuration change.
 - **Opening a merge request deploys a preview**, which is the rendered site the reviewer reads.
 
 The reference [GitLab CI pipeline for an Antora documentation repository](05-gitlab-ci-pipeline-reference.md) documents the jobs and rules that implement this routing.
